@@ -1,0 +1,18 @@
+# Szpitale (id | nazwa | wsp. x | wsp. y | Liczba łóżek | Liczba wolnych łóżek)
+0 | Szpital Wojewódzki nr 997 | 10 | 100 | 1000 | 0
+1 | Krakowski Szpital Kliniczny | 100 | 100 | 999 | 0
+2 | Pierwszy Szpital im. Prezesa RP | 2 | 30 | 99 | 0
+3 | Drugi Szpital im. Naczelnika RP | 150 | 50 | 70 | 1
+4 | Trzeci Szpital im. Prezesa RP | 20 | 15 | 10 | 0
+5 | Czwarryu Szpital im. Naczelnika RP | 110 | 20 | 70 | 0
+
+# Obiekty (id | nazwa | wsp. x | wsp. y)
+0 | Pomnik Fryderyka Chopina | 110 | 55
+
+# Drogi (id | id_szpitala | id_szpitala | odległość)
+0 | 0 | 2 | 10
+1 | 1 | 5 | 10000
+2 | 2 | 3 | 200000000
+3 | 2 | 4 | 2
+4 | 4 | 5 | 5
+

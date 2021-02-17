@@ -1,0 +1,182 @@
+﻿\documentclass{article} 
+
+\usepackage[english]{babel} 
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{txfonts}
+\usepackage{mathdots}
+\usepackage[classicReIm]{kpfonts}
+\usepackage{graphicx}
+
+
+\begin{document}
+
+
+\noindent 
+
+\noindent 
+
+\noindent 
+
+\noindent 
+
+\noindent 
+
+\section{Ambulance Path Advisor -
+Specyfikacja implementacyjna}
+
+\noindent 
+
+\noindent 
+
+\noindent 
+
+\noindent 
+
+\noindent 
+
+\noindent 
+
+\noindent 
+
+\noindent 
+
+\noindent \textit{Wydzia{\l}: Elektryczny}
+
+\noindent \textit{Kierunek: Informatyka stosowana}
+
+\noindent \textit{Przedmiot: Algorytmy i struktury danych}
+
+\noindent \textit{}
+
+\noindent \textit{Edvin Suchodolskij}
+
+\noindent \textit{Konrad \v{Z}ilinski}
+
+\noindent \textit{Mateusz Pietrzak}
+
+\noindent 
+
+\eject
+
+\section{ Spis tre\'{s}ci:}
+
+\noindent 
+
+\noindent Opis og\'{o}lny.....................................................................................................................................................3
+
+\noindent Struktura folder\'{o}w.........................................................................................................................................3
+
+\noindent Opis klas.........................................................................................................................................................3
+
+\noindent Opis algorytmu..............................................................................................................................................4
+
+\noindent GUI...................................    .............................................................................................................................4
+
+\noindent Scenariusz dzia{\l}ania programu....................................................................................................................4
+
+\noindent Testowanie.....................................................................................................................................................5
+
+\eject
+
+\noindent 
+\section{Opis og\'{o}lny}
+
+\noindent Program s{\l}u\.{z}y dla S{\l}u\.{z}by Ochrony Zdrowia, kt\'{o}rej celem jest pomoc pacjentom dotkni\k{e}tych now\k{a} pandemi\k{a}, kt\'{o}re znajduj\k{a} si\k{e} na terenie kraju. Program wyznacza drog\k{e} dla karetki pogotowia, czyli kieruje karetk\k{a} razem z pacjentem do najbli\.{z}szego o\'{s}rodka medycznego, w celu znalezienia najkr\'{o}tszej drogi do szpitala maj\k{a}cego swobodne {\l}\'{o}\.{z}ko dla pacjenta. W wypadku, gdy w danym szpitalu nie zosta{\l}o si\k{e} wi\k{e}cej swobodnych {\l}\'{o}\.{z}ek, program naprawia pacjenta do najbli\.{z}szego szpitala, w kt\'{o}rym jeszcze dany pacjent nie by{\l}.
+
+\noindent 
+\section{Struktura folder\'{o}w}
+
+\noindent \textbf{W projekcie rozr\'{o}\.{z}niamy 3 g{\l}\'{o}wne foldery:}
+
+\noindent {}
+
+\noindent 1) src -- folder, w kt\'{o}rym jest umieszczony ca{\l}y kod licz\k{a}cy.
+
+\noindent 2) test -- folder, w kt\'{o}rym jest umieszczony kod testuj\k{a}cy.
+
+\noindent 3) doc -- folder, w kt\'{o}rym s\k{a} umieszczone specyfikacja implementacyjna i funkcjonalna.
+
+\noindent 
+\section{Opis klas}
+
+\noindent W programie jest 7 klas:
+
+\begin{enumerate}
+\item  Klasa \textbf{Hospital} -- przechowuje informacje o id, nazwie, po{\l}o\.{z}eniu, {\l}\'{o}\.{z}kachszpitala i wszystkich mo\.{z}liwych bezpo\'{s}rednich drogachwychodz\k{a}cych od tego szpitala do innychobiekt\'{o}w(szpitali lub skrzy\.{z}owa\'{n}). 
+
+\item  Klasa \textbf{Object} -- przechowuje informacje o id, nazwie i powo\.{z}eniuobiekt\'{o}w.
+
+\item  Klasa \textbf{Cross} -- przechowuje informacje o id, po{\l}o\.{z}eniu skrzy\.{z}owa\'{n} i wszystkich mo\.{z}liwych bezpo\'{s}rednich polaczeniach do innych obiekt\'{o}w (szpitali i innych skrzy\.{z}owa\'{n}). 
+
+\item  Klasa \textbf{Patient} -- przechowuje aktualne po{\l}o\.{z}eniepacjenta. 
+
+\item  Klasa \textbf{Map} -- szczytuje dane szpitali, dr\'{o}g oraz objekt\'{o}w, a tak\.{z}e tworzy map\k{e} kraju.
+
+\item  Klasa \textbf{FindHospital} -- znajduje szpital dla pacjenta. 
+
+\item  Klasa \textbf{Main} -- zarz\k{a}dza programem, szczytuje oraz wypisuje dane o pacjentach.
+\end{enumerate}
+
+\noindent 
+\section{Opis algorytmu}
+
+\noindent W danym projekcie u\.{z}yjemy algorytmu \textbf{\textit{Dijkstry}}. Wybrali\'{s}my go, poniewa\.{z} pomaga w znalezieniu najkr\'{o}tszej drogi do ka\.{z}dego objektu, nie sprawdzaj\k{a}c wszystkich mo\.{z}liwych dr\'{o}g. Algorytm wygl\k{a}da nast\k{e}puj\k{a}co:
+
+\begin{enumerate}
+
+\item Program otrzymuje punkt z kr\'{o}tego rozpoczyna obliczenia.
+\item Znajduje najkr\'{o}tsz\k{a} drog\k{e} do s\k{a}siedniego oczka.
+\item Przemieszcza si\k{e} do danego oczka, zapisuj\k{a}c jak\k{a} pokona{\l} drog\k{e}, oraz najkr\'{o}tsz\k{a} drog\k{e} do konkretnego oczka.
+\item Kontynuje kroki 2-3 do momentu, a\.{z} nie znajdziemy najkr\'{o}tsz\k{a} drog\k{e} do ka\.{z}dego oczka.
+\item W wypadku, gdyodleg{\l}o\'{s}\'{c} do zapisanych oczek jest r\'{o}wna, program bierze dowoln\k{a} z wcze\'{s}niej zapisanychdr\'{o}g i wraca, a\.{z} okarze si\k{e} w oczku, do kt\'{o}rego drog\k{e} wybra{\l}.
+\item Je\.{z}eli nowa droga do ju\.{z} przeanalizowanego oczka jest d{\l}u\.{z}sza od dotychczas zapisanej, to zostawiamy kr\'{o}tsz\k{a} drog\k{e}.
+\end{enumerate}
+
+\section{GUI}
+
+\noindent GUI s{\l}u\.{z}y do wybrania \'{s}cie\.{z}ki obu plik\'{o}w wej\'{s}ciowych oraz pliku wyj\'{s}ciowego. Pliku z danymi mapy szpitali oraz pliku z pacjentami. Dodatkowo, u\.{z}ytkownik b\k{e}dzie m\'{o}g{\l} zaobserwowa\'{c} przebieg dzia{\l}ania programu w postaci animacji wy\'{s}wietlanej w oknie.Cykle animacji uruchamiane b\k{e}d\k{a} po sobie b\k{a}d\'{z} manualnie. wybraniu wszystkich tych element\'{o}w i wci\'{s}ni\k{e}cie przycisku SUBMIT, program stworzy nowe okno, w kt\'{o}rym zostanie wy\'{s}wietlona animacja.
+
+\noindent Przebieg animacji - Karetka b\k{e}dzie si\k{e} przemieszcza{\l}a do miejsc docelowych w trakcie jednego ustalonego cyklu.
+
+\noindent 
+\section{Scenariusz dzia{\l}ania programu}
+
+\noindent Po uruchomieniu GUI i klikni\k{e}ciu przycisku SUBMIT program poczyna nast\k{e}puj\k{a}ce kroki:
+
+\begin{enumerate}
+\item Sprawdza poprawno\'{s}\'{c} pliku wej\'{s}ciowego.
+\item Czyta dane.
+\item Tworzy map\k{e} sk{\l}adaj\k{a}c\k{a} si\k{e} z szpitali i objekt\'{o}w.
+\item Szuka potencjalnych skrzy\.{z}owa\'{n} dr\'{o}g
+\item Sprawdza poprawno\'{s}\'{c} pliku wej\'{s}ciowego 2.
+\item Pobiera dane o pacjencie.
+\item Znajduje now\k{a} lub wykorzystuje ju\.{z} znan\k{a} drog\k{e} do najbli\.{z}szego szpitala, a\.{z} znajdzie wolne miejsce.
+\item Zapisuje pokonan\k{a} drog\k{e} pacjenta do pliku wyj\'{s}ciowego.
+\item Powtarza kroki 7-8 dla wszystkich pacjent\'{o}w.
+\end{enumerate}
+
+\noindent Po wyczerpaniu pacjent\'{o}w zostaje wy\'{s}wietlone repezentacja graficzna pokonanych dr\'{o}g wszystkich pacjent\'{o}w.
+
+\noindent 
+\section{Testowanie}
+
+\noindent Do przetestowania b\k{e}dziemy u\.{z}ywali narz\k{e}dzia JUnit 4.0 w celu znalezienia b{\l}\k{e}d\'{o}w w programie lub udowodnienia, \.{z}e program dzia{\l}a we w{\l}a\'{s}ciwy spos\'{o}b. GUI zostanie przetestowane r\k{e}cznie podczas tworzenia aplikacji. Program wykrywa nast\k{e}puj\k{a}ce b{\l}\k{e}dy:
+
+\begin{enumerate}
+\item  B{\l}\k{e}dn\k{a} \'{s}cie\.{z}k\k{e} lub brak pliku. 
+
+\item  Niepoprawn\k{a} ilo\'{s}\'{c} nag{\l}\'{o}wk\'{o}w w pliku wej\'{s}ciowym.
+
+\item  Niepoprawne indeksowanie.
+
+\item  Nadmiar element\'{o}w w poszczeg\'{o}lnych klasach.
+
+\item  Niepoprawny format pojedynczej linii w pliku wej\'{s}ciowym.
+
+\item  Niepoprawny typ elementu w pliku wej\'{s}ciowym.
+\end{enumerate}
+
+
+\end{document}
+

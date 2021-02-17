@@ -1,0 +1,321 @@
+﻿\documentclass{article} 
+
+\usepackage[english]{babel} 
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{txfonts}
+\usepackage{mathdots}
+\usepackage[classicReIm]{kpfonts}
+\usepackage{graphicx}
+
+
+\begin{document}
+
+
+
+\noindent 
+
+\noindent 
+
+\noindent 
+
+\noindent 
+
+\noindent 
+
+\section{Ambulance Path Advisor -
+Specyfikacja funkcjonalna}
+
+\noindent 
+
+\noindent 
+
+\noindent 
+
+\noindent 
+
+\noindent 
+
+\noindent 
+
+\noindent 
+
+\noindent 
+
+\noindent \textit{Wydzia{\l}: Elektryczny}
+
+\noindent \textit{Kierunek: Informatyka stosowana}
+
+\noindent \textit{Przedmiot: Algorytmy i struktury danych}
+
+\noindent \textit{}
+
+\noindent \textit{Edvin Suchodolskij}
+
+\noindent \textit{Konrad \v{Z}ilinski}
+
+\noindent \textit{Mateusz Pietrzak}
+
+\noindent 
+
+\eject
+
+\section{ Spis tre\'{s}ci:}
+
+\noindent 
+
+\noindent Opis og\'{o}lny.....................................................................................................................................................3
+
+\noindent Opis funkcjonalno\'{s}ci.....................................................................................................................................3
+
+\noindent Dane wej\'{s}ciowe..............................................................................................................................................3
+
+\noindent Plik przej\'{s}ciowy..............................................................................................................................................5
+
+\noindent Plik wyj\'{s}ciowy................................................................................................................................................6
+
+\noindent Scenariusz dzia{\l}ania programu.....................................................................................................................6
+
+\noindent Testowanie......................................................................................................................................................6 
+
+\eject
+
+\noindent 
+\section{Opis og\'{o}lny}
+
+\noindent Program s{\l}u\.{z}y do kierowania karetkami pogotowia w celu przewiezienia pacjent\'{o}w do o\'{s}rodk\'{o}w medycznych oraz znalezieniu jak najkr\'{o}tszej drogi do najbli\.{z}szego o\'{s}rodka zdrowia. W wypadku, gdy nie ma wolnych {\l}\'{o}\.{z}ek w najbli\.{z}szym szpitalu dla pacjenta, program powinien skierowa\'{c} karetk\k{e} pogotowia razem z pacjentem do innego najbli\.{z}szego o\'{s}rodka medycznego. Celem programu jest pomoc pacjentom, kt\'{o}re znajduj\k{a} si\k{e} na terenie kraju, znale\'{z}\'{c} jak najszybciej miejsce w dowolnym szpitalu.
+
+\noindent 
+\section{Opis funkcjonalno\'{s}ci}
+
+\noindent Przy uruchamianiu programu w interfejsie graficznym potrzebujemy wybra\'{c} \'{s}cie\.{z}k\k{e} do danych wej\'{s}ciowych, czyli informacja o szpitalach, obiektach oraz drogach kraju. Plik z danymi (rys 1.) jest dostarczany przez dyspozytora pogotowia. Tak\.{z}e do programu mo\.{z}e zosta\'{c} przekazana lista zawieraj\k{a}ca wsp\'{o}{\l}rz\k{e}dne pacjent\'{o}w (rys 2.). Dane wej\'{s}ciowe zawieraj\k{a} odpowiedni\k{a} struktur\k{e}. Istnieje mo\.{z}liwo\'{s}\'{c} wskazania miejsca dla zachowania pliku wyj\'{s}ciowego. Rezultatem jest zestaw informacji (plik), w kt\'{o}rym wskazane jest jak\k{a} drog\k{e} mia{\l} ka\.{z}dy pacjent i do jakiego szpitala zosta{\l} skierowany.
+
+\noindent 
+\section{Dane wej\'{s}ciowe}
+
+\noindent \textit{Przyk{\l}adowe dane dotycz\k{a}ce kraju:}
+
+\noindent {}
+
+\noindent \textbf{\# Szpitale (id {\textbar} nazwa {\textbar} wsp. x {\textbar} wsp. y {\textbar} Liczba {\l}\'{o}\.{z}ek {\textbar} Liczba wolnych {\l}\'{o}\.{z}ek)}
+
+\noindent \textit {1 {\textbar} Szpital Wojew\'{o}dzki nr 997 {\textbar} 10 {\textbar} 10 {\textbar} 1000 {\textbar} 100 }
+
+\noindent \textit {2 {\textbar} Krakowski Szpital Kliniczny {\textbar} 100 {\textbar} 120 {\textbar} 999 {\textbar} 99 }
+
+\noindent \textit {3 {\textbar} Pierwszy Szpital im. Prezesa RP {\textbar} 120 {\textbar} 130 {\textbar} 99 {\textbar} 0 }
+ 
+\noindent \textit {4 {\textbar} Drugi Szpital im. Naczelnika RP {\textbar} 10 {\textbar} 140 {\textbar} 70 {\textbar} 1 }
+
+\noindent \textit {5 {\textbar} Trzeci Szpital im. Kr\'{o}la RP {\textbar} 140 {\textbar} 10 {\textbar} 996 {\textbar} 0}
+
+\noindent {}
+
+\noindent \textbf {\# Obiekty (id {\textbar} nazwa {\textbar} wsp. x {\textbar} wsp. y) }
+
+\noindent \textit {1 {\textbar} Pomnik Wikipedii {\textbar} -1 {\textbar} 50}
+
+\noindent \textit {2 {\textbar} Pomnik Fryderyka Chopina {\textbar} 110 {\textbar} 55}
+
+\noindent \textit {3 {\textbar} Pomnik Anonimowego Przechodnia {\textbar} 40 {\textbar} 70}
+
+\noindent {}
+
+\noindent \textbf{\# Drogi (id {\textbar} id\_szpitala {\textbar} id\_szpitala {\textbar} odleg{\l}o\'{s}\'{c}) }
+
+\noindent \textit {1 {\textbar} 1 {\textbar} 2 {\textbar} 700}
+
+\noindent \textit {2 {\textbar} 1 {\textbar} 3 {\textbar} 550}
+
+\noindent \textit {3 {\textbar} 1 {\textbar} 5 {\textbar} 800}
+
+\noindent \textit {4 {\textbar} 2 {\textbar} 3 {\textbar} 300}
+
+\noindent \textit {5 {\textbar} 2 {\textbar} 4 {\textbar} 550}
+
+\noindent \textit {6 {\textbar} 3 {\textbar} 5 {\textbar} 600}
+
+\noindent \textit {7 {\textbar} 4 {\textbar} 6 {\textbar} 750}
+
+\noindent {}
+
+\noindent Przyk{\l}adowe dane dotycz\k{a}ce pacjent\'{o}w:
+
+\noindent {}
+
+\noindent \textbf{\# Pacjenci (id {\textbar} wsp. x {\textbar} wsp. y)}
+
+\noindent \textit {1 {\textbar} 20 {\textbar} 20}
+
+\noindent \textit {2 {\textbar} 99 {\textbar} 105}
+
+\noindent \textit {3 {\textbar} 23 {\textbar} 40}
+
+\noindent {}
+
+\noindent \textbf{Struktura pliku z danymi kraju:}
+
+\begin{enumerate}
+\item  Ka\.{z}dy wers, kt\'{o}ry rozpoczyna si\k{e} znakiem ,,\#'' jest komentarzem.
+
+\item  Po pierwszym komentarzu w ka\.{z}dym kolejnym wersie s\k{a} opisaneszpitale, czyli unikalne w\'{s}r\'{o}do\'{s}rodk\'{o}w medycznych id{\textbar} nazwa {\textbar} wsp\'{o}{\l}rz\k{e}dne na osi x {\textbar} wsp\'{o}{\l}rz\k{e}dne na osi y {\textbar} liczba {\l}\'{o}\.{z}ek {\textbar} liczba wolnych {\l}\'{o}\.{z}ek.
+
+\noindent 
+
+\item  Drugi komentarz oznacza, \.{z}e w nast\k{e}pnych wersach jest opis obiekt\'{o}w kraju.
+
+\item  Obiekty maj\k{a} by\'{c} opisane w nast\k{e}puj\k{a}cy spos\'{o}b: unikalne w\'{s}r\'{o}d obiekt\'{o}w id {\textbar} nazwa obiektu {\textbar} wsp\'{o}{\l}rz\k{e}dne na osi x {\textbar} wsp\'{o}{\l}rz\k{e}dne na osi y
+
+\item  Po trzecim komentarzu w ka\.{z}dym kolejnym wersie s\k{a} opisane drogi w nast\k{e}puj\k{a}cy spos\'{o}b: unikalne w\'{s}r\'{o}d dr\'{o}g id{\textbar} id szpitala, z kt\'{o}rego wyje\.{z}d\.{z}amy {\textbar} id szpitala, do kt\'{o}rego prowadzi droga {\textbar} d{\l}ugo\'{s}\'{c} drogi.
+
+\item  Dla poszczeg\'{o}lnych klas id pierwszego elementu ma by\'{c} r\'{o}wne 0,aka\.{z}dego kolejnego o 1 wi\k{e}kszy.
+
+\item  Dane s\k{a} oddzielane za pomoc\k{a} znaku ,,{\textbar}''.
+
+\item  Przed i po znakiem ,,{\textbar}'' dozwolona tylko jedna spacja.
+
+\item  Ka\.{z}da nazwa jest ci\k{a}giem dowolnych znak\'{o}w.
+
+\item  Maksymalna liczba szpitali orazobiekt\'{o}w wynosi 1000.
+
+\item  Maksymalna liczba dr\'{o}g wynosi 1 000 000.
+
+\item  Maksymalna warto\'{s}\'{c} wsp\'{o}{\l}rz\k{e}dnych jest zawarta w granicach [-1 000 000, 1 000 000].
+
+\item  Maksymalna d{\l}ugo\'{s}\'{c} nazwy wynosi 100.
+
+\item  Maksymalna liczba {\l}\'{o}\.{z}ek, wolnych {\l}\'{o}\.{z}ek stanowi 1 000 000.
+\end{enumerate}
+
+
+
+\noindent \textbf{Struktura pliku z danymi pacjent\'{o}w:}
+
+\begin{enumerate}
+\item  Pierwszy wers, kt\'{o}ry rozpoczyna si\k{e} znakiem ,,\#'' jest komentarzem.
+
+\item  Po komentarzu w ka\.{z}dym kolejnym wersie s\k{a} opisane pacjenci, czyli unikalne w\'{s}r\'{o}d pacjent\'{o}w id{\textbar} wsp\'{o}{\l}rz\k{e}dne na osi x {\textbar} wsp\'{o}{\l}rz\k{e}dne na osi y
+
+\item  Dane s\k{a} oddzielane za pomoc\k{a} znaku ,,{\textbar}''.
+
+\item  Przed i po znakiem ,,{\textbar}'' dozwolona tylko jedna spacja.
+
+\item  Maksymalna liczba pacjent\'{o}w wynosi 10 000.
+
+\item  Maksymalna warto\'{s}\'{c} wsp\'{o}{\l}rz\k{e}dnych jest zawarta w granicach [-1 000 000, 1 000 000].
+
+\item  Plik przej\'{s}ciowy
+\end{enumerate}
+
+\noindent
+
+\noindent 
+\section{Plik przej\'{s}ciowy}
+
+\noindent Plik przej\'{s}ciowy s{\l}u\.{z}y do przekazania niezb\k{e}dnej informacji dla stworzenia mapy, kt\'{o}ra b\k{e}dzie wykorzystywana w animacji. Posiada nast\k{e}puj\k{a}c\k{a} struktur\k{e}:
+
+\noindent {}
+
+\noindent \textbf{Ka\.{z}de id poprzedzone jest oznaczeniem klasy:}
+
+\noindent {}
+
+\noindent S -- szpital
+
+\noindent K -- skrzy\.{z}owanie
+
+\noindent O -- obiekt
+
+\noindent D -- droga
+
+\noindent {}
+
+\noindent id szpitala {\textbar} nazwa {\textbar} wsp\'{o}{\l}rz\k{e}dne na osi x {\textbar} wsp\'{o}{\l}rz\k{e}dne na osi y
+
+\noindent id skrzy\.{z}owania {\textbar} wsp\'{o}{\l}rz\k{e}dne na osi x {\textbar} wsp\'{o}{\l}rz\k{e}dne na osi y
+
+\noindent id obiektu {\textbar} nazwa {\textbar} wsp\'{o}{\l}rz\k{e}dne na osi x {\textbar} wsp\'{o}{\l}rz\k{e}dne na osi y
+
+\noindent id drogi {\textbar} id szpitala, z kt\'{o}rego wyje\.{z}d\.{z}amy {\textbar} id szpitala, do kt\'{o}rego prowadzi
+
+\noindent {}
+
+\noindent \textbf{Przyk{\l}adowy plik przej\'{s}ciowy:}
+
+\noindent {}
+
+\noindent \textit{S1 {\textbar} Szpital Wojew\'{o}dzki nr 997 {\textbar} 10 {\textbar} 10}
+
+\noindent \textit{S2 {\textbar} Krakowski Szpital Kliniczny {\textbar} 100 {\textbar} 120}
+
+\noindent \textit{S3 {\textbar} Pierwszy Szpital im. Prezesa RP {\textbar} 120 {\textbar} 130}
+
+\noindent \textit{S4 {\textbar} Drugi Szpital im. Naczelnika RP {\textbar} 10 {\textbar} 140}
+
+\noindent \textit{S5 {\textbar} Trzeci Szpital im. Kr\'{o}la RP {\textbar} 140 {\textbar} 10}
+
+\noindent \textit{K1 {\textbar} 15 {\textbar} 15}
+
+\noindent \textit{K2 {\textbar} 17 {\textbar} 36}
+
+\noindent \textit{K3 {\textbar} 87 {\textbar} 51}
+
+\noindent \textit{O1 {\textbar} Pomnik Wikipedii {\textbar} -1 {\textbar} 50}
+
+\noindent \textit{O2 {\textbar} Pomnik Fryderyka Szopena {\textbar} 110 {\textbar} 55}
+
+\noindent \textit{O3 {\textbar} Pomnik Anonimowego Przechodnia {\textbar} 40 {\textbar} 70}
+\noindent \textit{D1 {\textbar} 1 {\textbar} 2}
+
+\noindent \textit{D2 {\textbar} 1 {\textbar} 4}
+
+\noindent \textit{D3 {\textbar} 1 {\textbar} 5}
+
+\noindent \textit{D4 {\textbar} 2 {\textbar} 3}
+
+\noindent \textit{D5 {\textbar} 2 {\textbar} 4}
+
+\noindent \textit{D6 {\textbar} 3 {\textbar} 5}
+
+\noindent \textit{D7 {\textbar} 4 {\textbar} 5}
+
+\noindent 
+\section{Plik wyj\'{s}ciowy}
+
+\noindent Plik wyj\'{s}ciowy s{\l}u\.{z}y do stworzenia animacji oraz dla zaprezentowania drogi ka\.{z}dego pacjenta. Posiada nast\k{e}puj\k{a}c\k{a} struktur\k{e}:
+
+\noindent {}
+
+\noindent Id pacjenta, pocz\k{a}tkowe wsp\'{o}{\l}rz\k{e}dne na osi x, pocz\k{a}tkowe wsp\'{o}{\l}rz\k{e}dne na osi y {\textbar} Droga pacjenta do szpitala, w kt\'{o}rym:
+
+\noindent {}
+
+\noindent S -- o\'{s}rodek medyczny, liczba ca{\l}kowita - id
+
+\noindent K -- skrzy\.{z}owanie, liczba ca{\l}kowita -- id
+
+\noindent {}
+
+\noindent \textbf {Przyk{\l}adowy plik wyj\'{s}ciowy:}
+
+\noindent {}
+
+\noindent \textit {0 10 10 {\textbar} S0 K1 K3 }
+
+\noindent \textit {1 15 18 {\textbar} S1 S2 K1 S0 }
+
+\noindent \textit {2 30 40 {\textbar} S4 S1 S2 K1 S0 }
+
+\noindent 
+\section{Scenariusz dzia{\l}ania programu}
+
+\noindent Program otrzymuje plik, \'{s}cie\.{z}k\k{e} do plik\'{o}w wej\'{s}ciowych i wyj\'{s}ciowego. Je\.{z}eli dane wej\'{s}ciowe b\k{e}d\k{a} zapisane niepoprawnie lub nie b\k{e}d\k{a} istnie\'{c} to program poinformuje o b{\l}\k{e}dzie. Je\.{z}eli nie wska\.{z}emy dla programu, gdzie mamy zapisa\'{c} plik wyj\'{s}ciowy, to zapisze go w katalogu, w kt\'{o}rym jest sam program.
+
+\noindent 
+\section{Testowanie}
+
+\noindent Do testowania programu b\k{e}dziemy u\.{z}ywali narz\k{e}dzia JUnit 4.0 w celu znalezienia b{\l}\k{e}d\'{o}w w programie lub udowodnienia, \.{z}e program dzia{\l}a we w{\l}a\'{s}ciwy spos\'{o}b. GUI b\k{e}dzie testowany r\k{e}cznie, podczas implementacji.
+
+
+\end{document}
+
